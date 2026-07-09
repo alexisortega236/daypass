@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sayulita Day Pass by Nawalli — transportation from Puerto Vallarta, breakfast, unlimited pickleball, contrast therapy, pool access and evening margarita." />
+  <title>Sayulita Day Pass | Nawalli</title>
+  <style>
+    :root{
+      --bg:#f7f3ea;
+      --paper:#fffdf8;
+      --ink:#132044;
+      --muted:#65708a;
+      --line:rgba(19,32,68,.13);
+      --soft:#ece4d7;
+      --aqua:#129d98;
+      --aqua-soft:#d9f2ef;
+      --sand:#c9aa73;
+      --white:#fff;
+      --shadow:0 20px 60px rgba(19,32,68,.10);
+      --radius:22px;
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      overflow-x:hidden;
+    }
+
+    [data-lang="en"] .es{display:none!important}
+    [data-lang="es"] .en{display:none!important}
+
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;border:0}
+
+    .progress{
+      position:fixed;
+      top:0;left:0;
+      height:3px;width:0;
+      background:var(--aqua);
+      z-index:1000;
+    }
+
+    .container{
+      width:min(1180px,calc(100% - 40px));
+      margin:auto;
+    }
+
+    .nav{
+      position:fixed;
+      top:18px;left:50%;
+      transform:translateX(-50%);
+      width:min(1180px,calc(100% - 32px));
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 14px 12px 18px;
+      border:1px solid rgba(255,255,255,.45);
+      background:rgba(247,243,234,.78);
+      backdrop-filter:blur(18px);
+      border-radius:999px;
+      box-shadow:0 12px 38px rgba(19,32,68,.08);
+      transition:.3s var(--ease);
+    }
+    .nav.scrolled{
+      background:rgba(255,253,248,.92);
+      border-color:var(--line);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:850;
+      font-size:.78rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .mark{
+      width:34px;height:34px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      display:grid;
+      place-items:center;
+      position:relative;
+      background:var(--paper);
+    }
+    .mark::before{
+      content:"";
+      width:12px;height:12px;
+      border-radius:50%;
+      border:2px solid var(--aqua);
+    }
+    .nav-links{
+      display:flex;
+      gap:26px;
+      align-items:center;
+      font-size:.92rem;
+      color:var(--muted);
+    }
+    .nav-links a:hover{color:var(--ink)}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .lang{
+      display:flex;
+      padding:3px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:var(--paper);
+    }
+    .lang button{
+      cursor:pointer;
+      background:transparent;
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:.72rem;
+      font-weight:850;
+      letter-spacing:.08em;
+      color:var(--muted);
+    }
+    [data-lang="es"] .lang [data-set-lang="es"],
+    [data-lang="en"] .lang [data-set-lang="en"]{
+      background:var(--ink);
+      color:white;
+    }
+    .nav-cta{
+      padding:11px 17px;
+      border-radius:999px;
+      background:var(--ink);
+      color:white;
+      font-weight:850;
+      transition:.25s var(--ease);
+      white-space:nowrap;
+    }
+    .nav-cta:hover{transform:translateY(-2px);background:var(--aqua)}
+
+    .hero{
+      min-height:100svh;
+      padding:128px 0 70px;
+      display:grid;
+      align-items:center;
+      position:relative;
+      background:
+        linear-gradient(90deg,rgba(247,243,234,.98) 0%,rgba(247,243,234,.88) 44%,rgba(247,243,234,.18) 100%),
+        url("https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=2200&q=86") center right/cover;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0;
+      height:1px;
+      background:var(--line);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 410px;
+      gap:70px;
+      align-items:end;
+    }
+    .eyebrow{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      color:var(--aqua);
+      font-weight:850;
+      letter-spacing:.19em;
+      text-transform:uppercase;
+      font-size:.75rem;
+      margin-bottom:20px;
+    }
+    .eyebrow::before{content:"";width:42px;height:1px;background:currentColor}
+    h1{
+      margin:0;
+      max-width:780px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(4rem,8.5vw,8.6rem);
+      line-height:.86;
+      letter-spacing:-.06em;
+    }
+    h1 em{
+      display:block;
+      color:var(--aqua);
+      font-weight:400;
+      font-size:.55em;
+      letter-spacing:-.035em;
+      margin-top:.14em;
+    }
+    .hero p{
+      max-width:650px;
+      margin:28px 0 0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1.1rem;
+    }
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+    }
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      padding:15px 20px;
+      border-radius:999px;
+      font-weight:850;
+      cursor:pointer;
+      transition:.25s var(--ease);
+      border:1px solid transparent;
+    }
+    .btn-primary{background:var(--ink);color:white}
+    .btn-primary:hover{background:var(--aqua);transform:translateY(-2px)}
+    .btn-secondary{background:rgba(255,253,248,.75);border-color:var(--line);color:var(--ink)}
+    .btn-secondary:hover{background:white;transform:translateY(-2px)}
+
+    .price-panel{
+      background:rgba(255,253,248,.84);
+      backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.55);
+      border-radius:28px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    .price-panel .top{
+      color:var(--aqua);
+      font-weight:850;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.72rem;
+    }
+    .price{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:3.9rem;
+      letter-spacing:-.05em;
+      line-height:.95;
+      margin:16px 0 8px;
+    }
+    .price small{
+      display:block;
+      font-family:inherit;
+      font-size:1.9rem;
+      color:var(--muted);
+    }
+    .saving{
+      display:inline-block;
+      margin-top:16px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:var(--aqua-soft);
+      color:var(--aqua);
+      font-size:.75rem;
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .quick-facts{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:rgba(255,253,248,.55);
+    }
+    .facts-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+    }
+    .fact{
+      padding:28px 22px;
+      border-right:1px solid var(--line);
+    }
+    .fact:last-child{border-right:0}
+    .fact span{
+      display:block;
+      color:var(--aqua);
+      font-size:.72rem;
+      font-weight:850;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .fact strong{font-size:1.16rem}
+
+    section{
+      padding:110px 0;
+    }
+    .section-head{
+      display:grid;
+      gap:70px;
+      align-items:end;
+      margin-bottom:50px;
+    }
+    .kicker{
+      color:var(--aqua);
+      font-weight:850;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.75rem;
+      margin-bottom:15px;
+    }
+    h2{
+      margin:0;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(2.8rem,5.6vw,6rem);
+      line-height:.94;
+      letter-spacing:-.05em;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1.05rem;
+      max-width:720px;
+    }
+
+    .minimal-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      border:1px solid var(--line);
+      border-radius:26px;
+      overflow:hidden;
+      background:var(--paper);
+      box-shadow:var(--shadow);
+    }
+    .included{
+      min-height:250px;
+      padding:28px;
+      border-right:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      transition:.28s var(--ease);
+      position:relative;
+      overflow:hidden;
+    }
+    .included:nth-child(4n){border-right:0}
+    .included:nth-last-child(-n+4){border-bottom:0}
+    .included:hover{
+      background:#f2eee4;
+      transform:translateY(-3px);
+    }
+    .number{
+      color:var(--aqua);
+      font-weight:850;
+      font-size:.78rem;
+      letter-spacing:.12em;
+      margin-bottom:52px;
+    }
+    .included h3{
+      margin:0 0 10px;
+      font-size:1.15rem;
+      letter-spacing:-.02em;
+    }
+    .included p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:.95rem;
+    }
+
+    .image-band{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .image-tile{
+      min-height:460px;
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .image-tile.small{
+      display:grid;
+      grid-template-rows:1fr 1fr;
+      gap:18px;
+      box-shadow:none;
+      border-radius:0;
+      overflow:visible;
+    }
+    .image-tile.small div{
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .image-tile img{
+      width:100%;height:100%;object-fit:cover;
+      filter:saturate(.92) contrast(.98);
+      transition:.6s var(--ease);
+    }
+    .image-tile:hover img{transform:scale(1.04)}
+
+    .dark-section{
+      background:var(--ink);
+      color:white;
+      position:relative;
+      overflow:hidden;
+    }
+    .dark-section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.08;
+      background:
+        linear-gradient(90deg,transparent 49%,white 50%,transparent 51%),
+        linear-gradient(transparent 49%,white 50%,transparent 51%);
+      background-size:120px 120px;
+    }
+    .dark-section .container{position:relative}
+    .dark-section .section-head p,
+    .dark-section .muted{color:rgba(255,255,255,.68)}
+    .dark-section h2{color:white}
+    .dark-section .btn-secondary{
+      background:transparent;
+      border-color:rgba(255,255,255,.24);
+      color:white;
+    }
+    .dark-section .btn-secondary:hover{
+      background:white;
+      color:var(--ink);
+    }
+    .split{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:60px;
+      align-items:center;
+    }
+    .split-photo{
+      height:560px;
+      border-radius:180px 24px 24px 24px;
+      overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.28);
+    }
+    .split-photo img{width:100%;height:100%;object-fit:cover}
+    .list{
+      display:grid;
+      gap:12px;
+      margin-top:28px;
+    }
+    .list div{
+      padding:16px 18px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:16px;
+      background:rgba(255,255,255,.045);
+      color:rgba(255,255,255,.84);
+      font-weight:700;
+    }
+    .light-list div{
+      color:var(--ink);
+      background:var(--paper);
+      border-color:var(--line);
+      box-shadow:0 12px 30px rgba(19,32,68,.05);
+    }
+
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      border:1px solid var(--line);
+      border-radius:26px;
+      overflow:hidden;
+      background:var(--paper);
+      box-shadow:var(--shadow);
+    }
+    .step{
+      padding:26px;
+      border-right:1px solid var(--line);
+    }
+    .step:last-child{border-right:0}
+    .step span{
+      color:var(--aqua);
+      font-size:.72rem;
+      font-weight:850;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+    }
+    .step strong{
+      display:block;
+      margin:14px 0 8px;
+      font-size:1.1rem;
+    }
+    .step p{margin:0;color:var(--muted);line-height:1.5;font-size:.92rem}
+
+    .reserve{
+      padding:80px 0 105px;
+    }
+    .reserve-card{
+      border-radius:30px;
+      padding:52px;
+      background:
+        linear-gradient(90deg,rgba(19,32,68,.94),rgba(19,32,68,.78)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85") center/cover;
+      color:white;
+      box-shadow:var(--shadow);
+    }
+    .reserve-card h2{color:white;max-width:860px}
+    .reserve-card p{
+      max-width:750px;
+      color:rgba(255,255,255,.72);
+      line-height:1.75;
+      font-size:1.05rem;
+    }
+
+    footer{
+      padding:36px 20px 46px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.88rem;
+      border-top:1px solid var(--line);
+    }
+
+    .float-cta{
+      position:fixed;
+      right:20px;bottom:20px;
+      z-index:60;
+      padding:14px 18px;
+      border-radius:999px;
+      background:var(--aqua);
+      color:white;
+      font-weight:850;
+      box-shadow:0 16px 38px rgba(18,157,152,.32);
+      transition:.25s var(--ease);
+    }
+    .float-cta:hover{transform:translateY(-2px);background:var(--ink)}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:.7s var(--ease)}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:1000px){
+      .nav-links{display:none}
+      .hero-grid,.section-head,.split{grid-template-columns:1fr}
+      .facts-grid{grid-template-columns:1fr 1fr}
+      .fact:nth-child(2){border-right:0}
+      .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .minimal-grid{grid-template-columns:1fr 1fr}
+      .included:nth-child(2n){border-right:0}
+      .included:nth-child(4n){border-right:0}
+      .included:nth-last-child(-n+4){border-bottom:1px solid var(--line)}
+      .included:nth-last-child(-n+2){border-bottom:0}
+      .image-band{grid-template-columns:1fr}
+      .timeline{grid-template-columns:1fr 1fr}
+      .step{border-bottom:1px solid var(--line)}
+      .step:nth-child(even){border-right:0}
+      .split-photo{height:460px}
+    }
+
+    @media(max-width:680px){
+      .container{width:min(100% - 28px,1180px)}
+      .nav{top:10px;width:calc(100% - 20px);padding:9px 10px}
+      .brand span:last-child{display:none}
+      .nav-cta{padding:10px 12px;font-size:.82rem}
+      .lang button{padding:7px 9px}
+      .hero{padding:112px 0 50px;background:
+        linear-gradient(180deg,rgba(247,243,234,.96) 0%,rgba(247,243,234,.86) 64%,rgba(247,243,234,.48) 100%),
+        url("https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=1400&q=86") center/cover;}
+      h1{font-size:clamp(3.6rem,17vw,6.2rem)}
+      .actions{flex-direction:column}
+      .btn{width:100%}
+      .price{font-size:3rem}
+      .facts-grid,.minimal-grid,.timeline{grid-template-columns:1fr}
+      .fact,.included,.step{border-right:0!important;border-bottom:1px solid var(--line)!important}
+      .fact:last-child,.included:last-child,.step:last-child{border-bottom:0!important}
+      section{padding:82px 0}
+      .image-tile{min-height:320px}
+      .split-photo{height:380px;border-radius:100px 24px 24px 24px}
+      .reserve-card{padding:36px 24px}
+      .float-cta span{display:none}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    }
+  
+/* Assets correctos de pájaros Nawalli */
+.day-bird-hero-main,
+.day-bird-hero-small,
+.day-bird-card,
+.day-bird-includes,
+.day-bird-pickle,
+.day-bird-stay,
+.day-bird-reserve {
+  position: absolute;
+  pointer-events: none;
+  height: auto;
+  z-index: 1;
+  filter: brightness(0) saturate(100%) invert(76%) sepia(42%) saturate(533%) hue-rotate(127deg) brightness(94%) contrast(91%);
+}
+
+/* Pájaro grande del hero */
+.day-bird-hero-main {
+  right: 2vw;
+  top: 175px;
+  width: clamp(260px, 28vw, 500px);
+  opacity: .32;
+  transform: rotate(-5deg);
+}
+
+/* Pájaro pequeño del hero */
+.day-bird-hero-small {
+  left: 43vw;
+  top: 230px;
+  width: clamp(110px, 11vw, 190px);
+  opacity: .17;
+  transform: scaleX(-1) rotate(7deg);
+}
+
+/* Pájaro dentro de la tarjeta de precio */
+.day-bird-card {
+  right: -48px;
+  bottom: -46px;
+  width: 240px;
+  opacity: .22;
+  transform: rotate(-6deg);
+}
+
+/* Pájaro sutil en sección incluye */
+.day-bird-includes {
+  right: -70px;
+  top: 120px;
+  width: 360px;
+  opacity: .075;
+  z-index: 0;
+  transform: rotate(-4deg);
+}
+
+/* Pájaro en sección pickleball */
+.day-bird-pickle {
+  right: 4vw;
+  top: 90px;
+  width: 360px;
+  opacity: .14;
+  z-index: 0;
+  transform: rotate(-6deg);
+}
+
+/* Pájaro en stay */
+.day-bird-stay {
+  left: -70px;
+  bottom: 90px;
+  width: 340px;
+  opacity: .09;
+  z-index: 0;
+  transform: scaleX(-1) rotate(4deg);
+}
+
+/* Pájaro en CTA final */
+.day-bird-reserve {
+  right: 38px;
+  bottom: -70px;
+  width: 330px;
+  opacity: .16;
+  z-index: 0;
+  transform: rotate(-5deg);
+}
+
+.hero,
+.hero-card,
+.section,
+.pickle,
+.stay-section,
+.reserve {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner,
+.section > *:not(.day-bird-includes),
+.pickle-inner,
+.stay-section .section,
+.reserve-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-card > *:not(.day-bird-card) {
+  position: relative;
+  z-index: 2;
+}
+
+@media(max-width:900px){
+  .day-bird-hero-main {
+    right: -130px;
+    top: 205px;
+    width: 360px;
+    opacity: .18;
+  }
+
+  .day-bird-hero-small {
+    display: none;
+  }
+
+  .day-bird-card {
+    width: 170px;
+    opacity: .13;
+  }
+
+  .day-bird-includes,
+  .day-bird-pickle,
+  .day-bird-stay,
+  .day-bird-reserve {
+    opacity: .055;
+  }
+}
+
+
+/* =========================================================
+   Nawalli visual assets: pájaros + flores finales
+   ========================================================= */
+
+.nawalli-bird,
+.nawalli-flower,
+.nawalli-fern {
+  position: absolute;
+  pointer-events: none;
+  height: auto;
+  z-index: 1;
+}
+
+.nawalli-bird {
+  filter: brightness(0) saturate(100%) invert(76%) sepia(42%) saturate(533%) hue-rotate(127deg) brightness(94%) contrast(91%);
+}
+
+.nawalli-flower,
+.nawalli-fern {
+  filter: brightness(0) saturate(100%) invert(76%) sepia(42%) saturate(533%) hue-rotate(127deg) brightness(94%) contrast(91%);
+}
+
+/* HERO */
+.bird-hero-main {
+  right: -2vw;
+  top: 165px;
+  width: clamp(310px, 33vw, 560px);
+  opacity: .34;
+  transform: rotate(-5deg);
+}
+
+.bird-hero-secondary {
+  left: 40vw;
+  top: 245px;
+  width: clamp(120px, 12vw, 210px);
+  opacity: .18;
+  transform: scaleX(-1) rotate(7deg);
+}
+
+.bird-hero-top {
+  right: 27vw;
+  top: 118px;
+  width: clamp(90px, 8vw, 150px);
+  opacity: .14;
+  transform: rotate(-8deg);
+}
+
+.flower-hero-right {
+  right: 4vw;
+  bottom: 58px;
+  width: clamp(180px, 18vw, 300px);
+  opacity: .16;
+  transform: rotate(-8deg);
+}
+
+.fern-hero-left {
+  left: 3vw;
+  bottom: 64px;
+  width: clamp(170px, 17vw, 280px);
+  opacity: .13;
+  transform: rotate(4deg);
+}
+
+/* CARD HERO */
+.bird-card-main {
+  right: -44px;
+  top: 58px;
+  width: 230px;
+  opacity: .24;
+  transform: rotate(-5deg);
+}
+
+.flower-card-bottom {
+  left: -42px;
+  bottom: -58px;
+  width: 220px;
+  opacity: .12;
+  transform: rotate(12deg);
+}
+
+/* INCLUYE */
+.bird-includes-right {
+  right: -70px;
+  top: 118px;
+  width: 370px;
+  opacity: .075;
+  z-index: 0;
+  transform: rotate(-5deg);
+}
+
+.flower-includes-left {
+  left: -80px;
+  top: 330px;
+  width: 300px;
+  opacity: .07;
+  z-index: 0;
+  transform: rotate(10deg);
+}
+
+/* VALUE CARDS */
+.value-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  bottom: -62px;
+  width: 150px;
+  height: 150px;
+  background: url("assets/Ilustraciones_RGB-49.png") center/contain no-repeat;
+  opacity: .055;
+  filter: brightness(0) saturate(100%) invert(76%) sepia(42%) saturate(533%) hue-rotate(127deg) brightness(94%) contrast(91%);
+  pointer-events: none;
+}
+
+/* EXPERIENCE CARDS */
+.experience-card::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 92px;
+  height: 92px;
+  background: url("assets/Ilustraciones_RGB-55.png") center/contain no-repeat;
+  opacity: .18;
+  filter: brightness(0) saturate(100%) invert(76%) sepia(42%) saturate(533%) hue-rotate(127deg) brightness(94%) contrast(91%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: -70px;
+  bottom: -80px;
+  width: 240px;
+  height: 240px;
+  background: url("assets/Ilustraciones_RGB-48.png") center/contain no-repeat;
+  opacity: .07;
+  filter: brightness(0) saturate(100%) invert(76%) sepia(42%) saturate(533%) hue-rotate(127deg) brightness(94%) contrast(91%);
+  pointer-events: none;
+}
+
+/* PICKLEBALL */
+.bird-pickle-main {
+  right: 3vw;
+  top: 80px;
+  width: 390px;
+  opacity: .16;
+  z-index: 0;
+  transform: rotate(-6deg);
+}
+
+.flower-pickle-left {
+  left: -70px;
+  bottom: 80px;
+  width: 300px;
+  opacity: .09;
+  z-index: 0;
+  transform: rotate(8deg);
+}
+
+/* STAY */
+.bird-stay-left {
+  left: -78px;
+  bottom: 110px;
+  width: 350px;
+  opacity: .10;
+  z-index: 0;
+  transform: scaleX(-1) rotate(4deg);
+}
+
+.flower-stay-right {
+  right: -58px;
+  top: 120px;
+  width: 280px;
+  opacity: .10;
+  z-index: 0;
+  transform: rotate(-8deg);
+}
+
+/* INFO */
+.bird-info-right {
+  right: -65px;
+  top: 40px;
+  width: 300px;
+  opacity: .08;
+  z-index: 0;
+  transform: rotate(-6deg);
+}
+
+#informacion {
+  position: relative;
+  overflow: hidden;
+}
+
+/* RESERVE CTA */
+.bird-reserve-right {
+  right: 32px;
+  bottom: -74px;
+  width: 360px;
+  opacity: .19;
+  z-index: 0;
+  transform: rotate(-5deg);
+}
+
+.flower-reserve-left {
+  left: 28px;
+  top: 34px;
+  width: 210px;
+  opacity: .11;
+  z-index: 0;
+  transform: rotate(10deg);
+}
+
+/* LAYERS */
+.hero,
+.hero-card,
+.section,
+.pickle,
+.stay-section,
+.reserve {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner,
+.section > *:not(.nawalli-bird):not(.nawalli-flower):not(.nawalli-fern),
+.pickle-inner,
+.stay-section .section,
+.reserve-content,
+.info-strip {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-card > *:not(.nawalli-bird):not(.nawalli-flower):not(.nawalli-fern) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile */
+@media(max-width:900px) {
+  .bird-hero-main {
+    right: -155px;
+    top: 205px;
+    width: 390px;
+    opacity: .20;
+  }
+
+  .bird-hero-secondary,
+  .bird-hero-top {
+    display: none;
+  }
+
+  .flower-hero-right {
+    right: -80px;
+    bottom: 70px;
+    width: 230px;
+    opacity: .09;
+  }
+
+  .fern-hero-left {
+    left: -70px;
+    bottom: 42px;
+    width: 220px;
+    opacity: .08;
+  }
+
+  .bird-card-main {
+    right: -70px;
+    width: 180px;
+    opacity: .14;
+  }
+
+  .bird-includes-right,
+  .flower-includes-left,
+  .bird-pickle-main,
+  .flower-pickle-left,
+  .bird-stay-left,
+  .flower-stay-right,
+  .bird-info-right,
+  .bird-reserve-right,
+  .flower-reserve-left {
+    opacity: .055;
+  }
+}
+
+</style>
+</head>
+<body data-lang="es">
+  <div class="progress" id="progress"></div>
+
+  <nav class="nav" id="nav">
+    <a href="#inicio" class="brand">
+      <span class="mark"></span>
+      <span>NAWALLI · SAYULITA</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#incluye"><span class="es">Incluye</span><span class="en">Includes</span></a>
+      <a href="#pickleball">Pickleball</a>
+      <a href="#paquete"><span class="es">Paquete</span><span class="en">Package</span></a>
+      <a href="#itinerario"><span class="es">Itinerario</span><span class="en">Itinerary</span></a>
+    </div>
+
+    <div class="nav-actions">
+      <div class="lang">
+        <button type="button" data-set-lang="es">ES</button>
+        <button type="button" data-set-lang="en">EN</button>
+      </div>
+      <a class="nav-cta wa-link" href="#"><span class="es">Reservar</span><span class="en">Book</span></a>
+    </div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Nawalli · Sayulita</div>
+        <h1>Sayulita <em>Day Pass</em></h1>
+        <p class="es">
+          Disfruta un día de relajación y experiencias exclusivas en Nawalli: transporte redondo desde Puerto Vallarta, desayuno preparado al momento y más.
+        </p>
+        <p class="en">
+          Enjoy a day of relaxation and exclusive experiences at Nawalli: round-trip transportation from Puerto Vallarta, made-to-order breakfast, pickleball, contrast therapy, pool access, artisan snack by Julia’s and a complimentary welcome margarita.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary wa-link" href="#"><span class="es">Reservar por WhatsApp</span><span class="en">Book via WhatsApp</span></a>
+          <a class="btn btn-secondary" id="instagramLink" href="#" target="_blank" rel="noopener">Instagram Pickleball</a>
+        </div>
+      </div>
+
+      <aside class="price-panel reveal">
+        <span class="top"><span class="es">Precio por persona</span><span class="en">Per person</span></span>
+        <div class="price">$3,000 <small>MXN / $150 USD</small></div>
+        <p class="es">Incluye transporte redondo desde Puerto Vallarta. Salida 8 AM y regreso 8 PM.</p>
+        <p class="en">Includes round-trip transportation from Puerto Vallarta. Leave at 8 AM and return at 8 PM.</p>
+        <span class="saving"><span class="es">Ahorra 50% vs. retail</span><span class="en">Save 50% vs. retail</span></span>
+      </aside>
+    </div>
+  </header>
+
+  <section class="quick-facts">
+    <div class="container facts-grid">
+      <div class="fact">
+        <span><span class="es">Salida</span><span class="en">Departure</span></span>
+        <strong>PV · 8:00 AM</strong>
+      </div>
+      <div class="fact">
+        <span><span class="es">Regreso</span><span class="en">Return</span></span>
+        <strong>8:00 PM</strong>
+      </div>
+      <div class="fact">
+        <span><span class="es">Ubicación</span><span class="en">Location</span></span>
+        <strong><span class="es">A una cuadra de la playa</span><span class="en">One block from the beach</span></strong>
+      </div>
+      <div class="fact">
+        <span><span class="es">Valor</span><span class="en">Value</span></span>
+        <strong><span class="es">50% de ahorro</span><span class="en">50% savings</span></strong>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="incluye">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker"><span class="es">Tu Day Pass incluye</span><span class="en">Your Day Pass includes</span></div>
+            <h2><span class="es">Disfruta un día de relajación.</span><span class="en">Enjoy a day of relaxation.</span></h2>
+          </div>
+         
+        </div>
+
+        <div class="minimal-grid">
+          <article class="included reveal">
+            <div class="number">01</div>
+            <h3><span class="es">Pickleball ilimitado</span><span class="en">Unlimited Pickleball</span></h3>
+            <p class="es">Acceso ilimitado a las canchas durante la experiencia.</p>
+            <p class="en">Unlimited court access during the experience.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">02</div>
+            <h3><span class="es">Desayuno en Marea Café</span><span class="en">Breakfast at Marea Café</span></h3>
+            <p class="es">Desayuno preparado al momento para iniciar el día.</p>
+            <p class="en">Made-to-order breakfast to start the day.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">03</div>
+            <h3><span class="es">Terapia de contraste</span><span class="en">Contrast Therapy</span></h3>
+            <p class="es">Una hora de sauna y cold plunge.</p>
+            <p class="en">One hour of sauna and cold plunge.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">04</div>
+            <h3><span class="es">Alberca en Casa Nawalli</span><span class="en">Pool at Casa Nawalli</span></h3>
+            <p class="es">Acceso a la alberca y áreas comunes.</p>
+            <p class="en">Pool and common area access.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">05</div>
+            <h3><span class="es">Snack artesanal de Julia’s</span><span class="en">Artisan snack by Julia’s</span></h3>
+            <p class="es">Un detalle local para acompañar la experiencia.</p>
+            <p class="en">A local treat to complement the experience.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">06</div>
+            <h3><span class="es">Margarita de cortesía</span><span class="en">Complimentary Margarita</span></h3>
+            <p class="es">Una margarita al final del día.</p>
+            <p class="en">An evening margarita to close the day.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">07</div>
+            <h3><span class="es">Baños y regaderas con A/C</span><span class="en">Bathrooms and A/C showers</span></h3>
+            <p class="es">Baños, vestidores y regaderas con aire acondicionado.</p>
+            <p class="en">Bathrooms, dressing rooms and air-conditioned showers.</p>
+          </article>
+          <article class="included reveal">
+            <div class="number">08</div>
+            <h3><span class="es">Servicio personalizado</span><span class="en">Personalized service</span></h3>
+            <p class="es">Ambiente exclusivo, cuidado y relajado.</p>
+            <p class="en">An exclusive, relaxed and carefully hosted atmosphere.</p>
+          </article>
+        </div>
+
+        <div class="image-band">
+          <div class="image-tile reveal">
+            <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=1500&q=85" alt="Pool at Casa Nawalli" />
+          </div>
+          <div class="image-tile small">
+            <div class="reveal"><img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1200&q=85" alt="Pickleball court" /></div>
+            <div class="reveal"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85" alt="Contrast therapy wellness space" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="pickleball">
+      <div class="container split">
+        <div class="split-photo reveal">
+          <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1400&q=90" alt="Pickleball experience in Sayulita" />
+        </div>
+        <div>
+          <div class="kicker">Pickleball</div>
+          <h2><span class="es">Juega, descansa y vuelve a jugar.</span><span class="en">Play, rest and play again.</span></h2>
+          <p class="muted es">
+            La experiencia está diseñada para combinar deporte, recuperación y descanso en un solo día. Consulta la comunidad y novedades de pickleball en Instagram.
+          </p>
+          <p class="muted en">
+            The experience is designed to combine sport, recovery and leisure in a single day. Follow the pickleball community and updates on Instagram.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" id="instagramLink2" href="#" target="_blank" rel="noopener">Instagram Pickleball</a>
+            <a class="btn btn-secondary wa-link" href="#"><span class="es">Consultar disponibilidad</span><span class="en">Check availability</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="paquete">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Pickleball Package</div>
+            <h2><span class="es">Reserva tu próxima estadía con nosotros.</span><span class="en">Book your next stay with us.</span></h2>
+          </div>
+          
+        </div>
+
+        <div class="split">
+          <div>
+            <div class="list light-list" style="margin-top:0">
+              <div><span class="es">Luxury King Suite Accommodations</span><span class="en">Luxury King Suite accommodations</span></div>
+              <div><span class="es">Desayuno diario preparado al momento en Marea Café</span><span class="en">Daily made-to-order breakfast at Marea Café</span></div>
+              <div><span class="es">Nightly room turn down service con chocolate de Julia’s Café</span><span class="en">Nightly room turn down service with chocolate by Julia’s Café</span></div>
+              <div><span class="es">Margaritas por la tarde en Nativva</span><span class="en">Evening margaritas at Nativva</span></div>
+              <div><span class="es">Pase diario a sauna y cold plunge en Alchamize House</span><span class="en">Daily pass to sauna and cold plunge at Alchamize House</span></div>
+              <div><span class="es">Staff dedicado en sitio 24 horas</span><span class="en">Dedicated 24-hour on-site staff</span></div>
+              <div><span class="es">Pickleball ilimitado</span><span class="en">Unlimited pickleball</span></div>
+            </div>
+          </div>
+          <div class="image-tile reveal" style="min-height:560px">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=88" alt="Luxury suite accommodation" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="itinerario">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker"><span class="es">Itinerario</span><span class="en">Itinerary</span></div>
+            <h2><span class="es">De Puerto Vallarta a Sayulita, de 8 a 8.</span><span class="en">From Puerto Vallarta to Sayulita, 8 to 8.</span></h2>
+          </div>
+          <p class="es">Un recorrido claro, simple y fácil de entender para el visitante.</p>
+          <p class="en">A clear, simple and easy-to-understand flow for visitors.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="step reveal">
+            <span>8:00 AM</span>
+            <strong><span class="es">Salida de PV</span><span class="en">Leave PV</span></strong>
+            <p class="es">Transporte redondo incluido.</p>
+            <p class="en">Round-trip transportation included.</p>
+          </div>
+          <div class="step reveal">
+            <span>Morning</span>
+            <strong><span class="es">Desayuno y pickleball</span><span class="en">Breakfast and pickleball</span></strong>
+            <p class="es">Marea Café y acceso a canchas.</p>
+            <p class="en">Marea Café and court access.</p>
+          </div>
+          <div class="step reveal">
+            <span>Midday</span>
+            <strong><span class="es">Sauna y cold plunge</span><span class="en">Sauna and cold plunge</span></strong>
+            <p class="es">Una hora de terapia de contraste.</p>
+            <p class="en">One hour of contrast therapy.</p>
+          </div>
+          <div class="step reveal">
+            <span>Afternoon</span>
+            <strong><span class="es">Alberca y margarita</span><span class="en">Pool and margarita</span></strong>
+            <p class="es">Casa Nawalli, snack de Julia’s y playa cercana.</p>
+            <p class="en">Casa Nawalli, Julia’s snack and nearby beach.</p>
+          </div>
+          <div class="step reveal">
+            <span>8:00 PM</span>
+            <strong><span class="es">Regreso</span><span class="en">Return</span></strong>
+            <p class="es">Vuelta a Puerto Vallarta.</p>
+            <p class="en">Return to Puerto Vallarta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reserve">
+      <div class="container">
+        <div class="reserve-card">
+          <div class="kicker"><span class="es">Reserva tu experiencia</span><span class="en">Book your experience</span></div>
+          <h2><span class="es">Un día completo de Sayulita, a una cuadra de la playa.</span><span class="en">A full Sayulita day, one block from the beach.</span></h2>
+          <p class="es">
+            Transporte, desayuno, pickleball ilimitado, snack artesanal, wellness, alberca, regaderas y margarita en una sola experiencia.
+          </p>
+          <p class="en">
+            Transportation, breakfast, unlimited pickleball, artisan snack, wellness, pool access, showers and an evening margarita in one experience.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary wa-link" href="#"><span class="es">Reservar por WhatsApp</span><span class="en">Book via WhatsApp</span></a>
+            <a class="btn btn-secondary" href="#inicio"><span class="es">Volver al inicio</span><span class="en">Back to top</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="float-cta wa-link" href="#"><span>WhatsApp</span></a>
+
+  <footer>
+    <span class="es">Sayulita Day Pass by Nawalli · Puerto Vallarta a Sayulita · Pickleball, wellness y alberca</span>
+    <span class="en">Sayulita Day Pass by Nawalli · Puerto Vallarta to Sayulita · Pickleball, wellness and pool access</span>
+  </footer>
+
+  <script>
+    const whatsappNumber = "5213220000000";
+    const instagramUrl = "https://www.instagram.com/pickleball/";
+    const messages = {
+      es: "Hola, me interesa conocer disponibilidad para el Sayulita Day Pass de Nawalli.",
+      en: "Hi, I would like to check availability for the Nawalli Sayulita Day Pass."
+    };
+
+    const body = document.body;
+    const nav = document.getElementById("nav");
+    const progress = document.getElementById("progress");
+
+    function updateLinks(){
+      const lang = body.dataset.lang || "es";
+      document.documentElement.lang = lang;
+      const message = encodeURIComponent(messages[lang]);
+      document.querySelectorAll(".wa-link").forEach(link => {
+        link.href = `https://wa.me/${whatsappNumber}?text=${message}`;
+        link.target = "_blank";
+        link.rel = "noopener";
+      });
+      document.getElementById("instagramLink").href = instagramUrl;
+      document.getElementById("instagramLink2").href = instagramUrl;
+    }
+
+    document.querySelectorAll("[data-set-lang]").forEach(button => {
+      button.addEventListener("click", () => {
+        body.dataset.lang = button.dataset.setLang;
+        updateLinks();
+      });
+    });
+
+    function onScroll(){
+      const y = window.scrollY;
+      nav.classList.toggle("scrolled", y > 40);
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
+    }
+    addEventListener("scroll", onScroll, {passive:true});
+    onScroll();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if(entry.isIntersecting){
+          setTimeout(() => entry.target.classList.add("visible"), i * 75);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    updateLinks();
+  </script>
+</body>
+</html>

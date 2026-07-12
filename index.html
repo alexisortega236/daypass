@@ -137,9 +137,26 @@
       display:grid;
       align-items:end;
       overflow:hidden;
+      isolation:isolate;
+      background:#0a1235;
+    }
+    .hero-video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:0;
+      background:#0a1235;
+    }
+    .hero-shade{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
       background:
-        linear-gradient(120deg,rgba(10,18,53,.94) 8%,rgba(10,18,53,.62) 54%,rgba(10,18,53,.2) 100%),
-        url("https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=2200&q=85") center/cover;
+        linear-gradient(120deg,rgba(10,18,53,.92) 8%,rgba(10,18,53,.58) 54%,rgba(10,18,53,.18) 100%),
+        linear-gradient(180deg,rgba(10,18,53,.2) 0%,rgba(10,18,53,.54) 100%);
     }
     .hero::after{
       content:"";
@@ -150,6 +167,7 @@
       border:1px solid rgba(109,224,215,.35);
       box-shadow:0 0 0 70px rgba(109,224,215,.04),0 0 0 150px rgba(109,224,215,.03);
       animation:float 9s ease-in-out infinite;
+      z-index:1;
     }
     .hero-orbit{
       position:absolute;
@@ -389,18 +407,27 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      padding:9px 12px;
+      padding:10px 14px;
       border-radius:999px;
-      background:rgba(18,157,152,.1);
-      border:1px solid rgba(18,157,152,.16);
-      color:var(--ink);
+      background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 52%, #962fbf 78%, #4f5bd5 100%) border-box;
+      border:2px solid transparent;
+      color:#c13584;
       font-size:.82rem;
-      font-weight:850;
+      font-weight:900;
       white-space:nowrap;
       transition:.25s var(--ease);
+      box-shadow:0 10px 24px rgba(15,26,73,.08);
     }
-    .benefit-link:hover{background:rgba(18,157,152,.18)}
+    .benefit-link:hover{
+      transform:translateY(-2px);
+      color:white;
+      background:
+        radial-gradient(circle at 18% 105%, #feda75 0 18%, transparent 35%),
+        linear-gradient(135deg, #fa7e1e 0%, #d62976 48%, #962fbf 78%, #4f5bd5 100%);
+      box-shadow:0 16px 34px rgba(193,53,132,.22);
+    }
     .benefit-card h3{
       margin:0;
       font-size:1.28rem;
@@ -502,7 +529,25 @@
       overflow:hidden;
       box-shadow:0 40px 90px rgba(0,0,0,.35);
     }
-    .pickle-media img{width:100%;height:100%;object-fit:cover}
+    .pickle-gallery{
+      width:100%;
+      height:100%;
+      display:grid;
+      grid-template-columns:1.18fr .82fr;
+      grid-template-rows:1fr 1fr;
+      gap:8px;
+      background:rgba(255,255,255,.12);
+    }
+    .pickle-gallery img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .8s var(--ease);
+    }
+    .pickle-gallery img:first-child{
+      grid-row:1 / span 2;
+    }
+    .pickle-media:hover .pickle-gallery img{transform:scale(1.04)}
     .pickle-media .stamp{
       position:absolute;right:24px;bottom:24px;
       width:150px;height:150px;border-radius:50%;
@@ -609,7 +654,7 @@
       overflow:hidden;
       background:
         linear-gradient(110deg,rgba(12,20,61,.95),rgba(12,20,61,.72)),
-        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85") center/cover;
+        url("final.jpg") center/cover;
       box-shadow:var(--shadow);
     }
     .reserve::after{
@@ -723,6 +768,16 @@
   </nav>
 
   <header class="hero" id="inicio">
+    <video
+      class="hero-video"
+      id="heroVideo"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+      loop
+      src="secuencia-01.mp4"></video>
+    <div class="hero-shade"></div>
     <div class="hero-orbit"></div>
     <div class="hero-inner">
       <div>
@@ -821,7 +876,7 @@
         <article class="benefit-card reveal">
           <div class="benefit-card-top">
             <span class="benefit-tag"><span class="es">Desayuno</span><span class="en">Breakfast</span></span>
-            <a class="benefit-link" href="#" target="_blank" rel="noopener"><span class="es">Instagram</span><span class="en">Instagram</span></a>
+            <a class="benefit-link" href="https://www.instagram.com/marea.cafesayu/" target="_blank" rel="noopener">Instagram</a>
           </div>
           <h3>Desayuno en Marea Café</h3>
           <p class="es">Desayuno preparado al momento para empezar el día con calma y sabor local.</p>
@@ -831,7 +886,7 @@
         <article class="benefit-card reveal">
           <div class="benefit-card-top">
             <span class="benefit-tag"><span class="es">Recuperación</span><span class="en">Recovery</span></span>
-            <a class="benefit-link" href="#" target="_blank" rel="noopener"><span class="es">Instagram</span><span class="en">Instagram</span></a>
+            <a class="benefit-link" href="https://www.alchemizehouse.com" target="_blank" rel="noopener"><span class="es">Sitio web</span><span class="en">Website</span></a>
           </div>
           <h3>Terapia de contraste</h3>
           <p class="es">Una sesión de sauna y cold plunge para activar el cuerpo y cerrar mejor la experiencia.</p>
@@ -841,7 +896,7 @@
         <article class="benefit-card reveal">
           <div class="benefit-card-top">
             <span class="benefit-tag"><span class="es">Nawalli</span><span class="en">Nawalli</span></span>
-            <span class="benefit-link"><span class="es">Incluido</span><span class="en">Included</span></span>
+            <a class="benefit-link" href="https://www.instagram.com/plaza_nawalli?igsh=MWVnN3djZDQzeWZ4" target="_blank" rel="noopener">Instagram</a>
           </div>
           <h3>Alberca Nawalli</h3>
           <p class="es">Acceso a alberca y áreas comunes en un ambiente relajado y cuidado.</p>
@@ -851,7 +906,7 @@
         <article class="benefit-card reveal">
           <div class="benefit-card-top">
             <span class="benefit-tag"><span class="es">Snack</span><span class="en">Snack</span></span>
-            <a class="benefit-link" href="#" target="_blank" rel="noopener"><span class="es">Instagram</span><span class="en">Instagram</span></a>
+            <a class="benefit-link" href="https://www.instagram.com/juliassayulita?igsh=c3Iyd28xeXhhN3k=" target="_blank" rel="noopener">Instagram</a>
           </div>
           <h3>Snack artesanal</h3>
           <p class="es">Un detalle local y artesanal para acompañar el día entre actividades.</p>
@@ -861,7 +916,7 @@
         <article class="benefit-card reveal">
           <div class="benefit-card-top">
             <span class="benefit-tag"><span class="es">Cierre</span><span class="en">Finish</span></span>
-            <a class="benefit-link" href="#" target="_blank" rel="noopener"><span class="es">Instagram Nativa</span><span class="en">Nativa Instagram</span></a>
+            <a class="benefit-link" href="https://www.instagram.com/nativvasayulita?igsh=YjYzeTdlc2lka2hm" target="_blank" rel="noopener">Instagram</a>
           </div>
           <h3>Margarita de cortesía</h3>
           <p class="es">Una margarita al final del día para cerrar la experiencia con un toque social y relajado.</p>
@@ -901,7 +956,11 @@
     <section class="pickle" id="pickleball">
       <div class="pickle-inner">
         <div class="pickle-media">
-          <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1400&q=90" alt="Pickleball in Sayulita" />
+          <div class="pickle-gallery">
+            <img src="pb-1.jpg" alt="Pickleball en Sayulita" />
+            <img src="pb-2.jpg" alt="Cancha de pickleball en Nawalli" />
+            <img src="pb-3.jpg" alt="Experiencia de pickleball en Sayulita" />
+          </div>
           <div class="stamp"><span class="es">Pickleball<br>Package</span><span class="en">Pickleball<br>Package</span></div>
         </div>
         <div class="pickle-copy">
@@ -915,7 +974,7 @@
             For guests who want to take the experience further: luxury king suite accommodations, daily breakfast at Marea Café, nightly turn down service, evening margaritas at Nativva, daily contrast therapy and unlimited pickleball.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary wa-link" href="#"><span class="es">Consultar paquete</span><span class="en">Ask about package</span></a>
+            <a class="btn btn-primary" href="https://hotels.cloudbeds.com/reservation/VgT2Ev" target="_blank" rel="noopener"><span class="es">Consultar paquete</span><span class="en">Ask about package</span></a>
             <a class="btn btn-ghost" id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a>
           </div>
         </div>
@@ -992,16 +1051,16 @@
 
     <section class="reserve">
       <div class="reserve-content">
-        <div class="kicker"><span class="es">Reserva tu experiencia</span><span class="en">Book your experience</span></div>
-        <h2><span class="es">Un día completo de Sayulita, sin complicarte la logística.</span><span class="en">A full Sayulita day without the logistics.</span></h2>
+        <div class="kicker"><span class="es">Solicitudes privadas</span><span class="en">Private requests</span></div>
+        <h2><span class="es">Celebra tus momentos más especiales en la Familia Nawalli.</span><span class="en">Celebrate your most special moments with the Nawalli family.</span></h2>
         <p class="es">
-          Transporte, desayuno, pickleball ilimitado, snack artesanal, wellness, alberca, regaderas y margarita en una sola experiencia. Escríbenos para consultar disponibilidad.
+          Desayunos, alberca, brunch, cocteles, wellness y espacios únicos para crear recuerdos inolvidables con quienes más quieres. Organizamos experiencias privadas y celebraciones personalizadas.
         </p>
         <p class="en">
-          Transportation, breakfast, unlimited pickleball, artisan snack, wellness, pool access, showers and an evening margarita in one experience. Message us to check availability.
+          Breakfasts, pool time, brunch, cocktails, wellness and unique spaces to create unforgettable memories with the people you love most. We organize private experiences and personalized celebrations.
         </p>
         <div class="reserve-actions">
-          <a class="btn btn-primary wa-link" href="#"><span class="es">Reservar por WhatsApp</span><span class="en">Book via WhatsApp</span></a>
+          <a class="btn btn-primary wa-link" href="#"><span class="es">Planea tu evento</span><span class="en">Plan your event</span></a>
           <a class="btn btn-ghost" href="#inicio"><span class="es">Volver al inicio</span><span class="en">Back to top</span></a>
         </div>
       </div>
@@ -1019,11 +1078,11 @@
   </footer>
 
   <script>
-    const whatsappNumber = "5213220000000";
+    const whatsappNumber = "523314051430";
     const instagramUrl = "https://www.instagram.com/pickleball/";
     const messages = {
-      es: "Hola, me interesa conocer disponibilidad para el Sayulita Day Pass de Nawalli.",
-      en: "Hi, I would like to check availability for the Nawalli Sayulita Day Pass."
+      es: "Hola, me interesa planear un evento o celebración privada con la Familia Nawalli.",
+      en: "Hi, I would like to plan a private event or celebration with the Nawalli family."
     };
 
     const body = document.body;
